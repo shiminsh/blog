@@ -1,0 +1,3 @@
+# Configuration
+django-configurations=0.8
+
