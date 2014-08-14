@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
-from blogging import views
+from django.views.generic import TemplateView
 from django.contrib import admin
+from blogging import views
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -9,6 +10,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', TemplateView.as_view(template_name='home.html'), name="home"),
     url(r'^accounts/register/$', views.RegisterUser.as_view()),
     url(r'^accounts/register_success/$', 'blogging.views.register_success'),
 )
