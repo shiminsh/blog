@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">BlOogGiNg.COm</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="right"><a href="/accounts/login/">Login</a></li>
+            <li class="right"><a href="/accounts/register/">Sign up</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+        
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->
+
+     <div class="container marketing">
+       <h2>Your login details are invalid!</h2>
+       <p>Click <a href="/accounts/login/">here</a> to login again.</p>
+       <p>New User Register here...</p>
+
+
+ {% endblock %}

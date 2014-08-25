@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Sign in{% endblock %}
+
+{% block navbar %}
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">BlOogGiNg.COm</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="right"><a href="/accounts/register/">Sign up</a></li>
+            <li class="active"><a href="/accounts/login/">Login</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+        
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->
+
+    {% endblock %}
+
+    {% block body %}
+         <div class="container marketing">
+      <form action="/accounts/login/" method="post" class="form-horizontal">{% csrf_token %}
+        <fieldset>
+        <legend>Please Sign in</legend>
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            <label for="id_username" class="col-lg-2 control-label">{{ form.username.label }}</label>
+            <div class="col-lg-10">
+              {{ form.username }}
+              <p>{{ form.username.errors }}</p>
+            </div>
+          </div>          
+        <div class="form-group">
+          <label for="inputPassword" class="col-lg-2 control-label">{{ form.password.label }}</label>
+          <div class="col-lg-10">
+              {{ form.password }}
+              <p>{{ form.password.errors }}</p>
+            <div class="checkbox">
+             <label>
+              <input type="checkbox"> Remember me
+             </label>
+            </div>
+          </div>
+        </div>
+      <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <button type="button" class="btn btn-default">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+        </fieldset>
+      </form>
+
+
+    {% endblock %}
+

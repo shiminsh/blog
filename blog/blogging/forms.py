@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib import auth
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -46,3 +47,26 @@ class RegistrationForm(UserCreationForm):
         raise forms.ValidationError('An account with this email already exists.'
         )
         
+
+class LoginForm(forms.Form):
+    username = forms.CharField(required=True)
+    password = forms.CharField(required=True)
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request')
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget = forms.TextInput(
+                             attrs={'placeholder': 'Username', 'class':'form-control'})
+        self.fields['username'].label = "Username"
+        self.fields['password'].widget = forms.PasswordInput(
+                             attrs={'placeholder': 'Password', 'class': 'form-control'})
+        self.fields['password'].label = "Password"
+
+    def clean(self):
+        username=self.cleaned_data['username']
+        password=self.cleaned_data['password']
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(self.request, user)
+        else:
+            raise forms.ValidationError("Login Credentials does not match")
