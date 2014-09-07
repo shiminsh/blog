@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import Blog
 
 
 class RegistrationForm(UserCreationForm):
@@ -70,3 +71,19 @@ class LoginForm(forms.Form):
             auth.login(self.request, user)
         else:
             raise forms.ValidationError("Login Credentials does not match")
+
+
+class BlogForm(forms.ModelForm):
+
+    class Meta:
+        model = Blog
+        exclude = ('user',)
+
+    def __init__(self, *args, **kwargs):
+        super(BlogForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget = forms.TextInput(
+                             attrs={'placeholder': 'Title', 'class':'form-control'})
+        self.fields['title'].label = "Title"
+        self.fields['description'].widget = forms.Textarea(
+                             attrs={'class': 'form-control', 'rows': 30, 'cols': 90 })
+        self.fields['description'].label = "Enter Description"

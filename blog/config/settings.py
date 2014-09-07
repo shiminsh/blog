@@ -49,6 +49,9 @@ class Common(Configuration):
     )
 
     THIRD_PARTY_APPS = (
+        'south',
+        'tinymce',
+        'django_wysiwyg',
         )
 
     LOCAL_APPS = (
@@ -113,6 +116,10 @@ class Common(Configuration):
     MEDIA_URL = '/media/'
 
     MEDIA_ROOT = join(BASE_DIR, 'media')
+
+    DJANGO_WYSIWYG_MEDIA_URL = '/media/'
+
+    DJANGO_WYSIWYG_FLAVOR = "tinymce_advanced"
 
 class Local(Common):
 

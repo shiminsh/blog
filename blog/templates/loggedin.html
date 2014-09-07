@@ -18,9 +18,9 @@
         </div>
     <div class="navbar-collapse collapse navbar-inverse-collapse">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Profile</a></li>
-      <li><a href="/newpost/">New Post</a></li>
+      <li class="active"><a href="/accounts/loggedin/">Home</a></li>
+      <li><a href="/accounts/loggedin/">Profile</a></li>
+      <li><a href="/posted/">New Post</a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -46,5 +46,47 @@
 
      
     <div class="container marketing">
-      <p>Hi {{ request.user.username }} you are logged in.</p>
+      
+        <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">
+            <h1>{{ request.user.username|title }}</h1>
+            <p>The article is the best platform for worth idea spreading so you can start blogging ...</p>
+          </div>
+          <div class="row">
+        {% if object_list %}
+              {% for blog in object_list %}
+              <div class="col-6 col-sm-6 col-lg-4">  
+              <a href="#"><h2>{{ blog.title|title }}</h2></a>
+              <p>{{ blog.description|truncatewords:"10"|capfirst|safe }} </p>
+              <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+              </div><!--/span-->
+            {% endfor %}
+            {% else %}
+      No posted blog yet
+      {% endif %}            
+          </div><!--/row-->
+        </div><!--/span-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="well sidebar-nav">
+            <ul class="nav">
+              <li>Some Links</li>
+              <li class="active"><a href="/changepasswd/">Change Password??</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li>Sidebar</li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+      </div>
  {% endblock %}
