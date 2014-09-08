@@ -45,8 +45,7 @@ class RegistrationForm(UserCreationForm):
             User._default_manager.get(email=email)
         except User.DoesNotExist:
             return email
-        raise forms.ValidationError('An account with this email already exists.'
-        )
+        raise forms.ValidationError('An account with this email already exists.')
         
 
 class LoginForm(forms.Form):
@@ -62,15 +61,6 @@ class LoginForm(forms.Form):
         self.fields['password'].widget = forms.PasswordInput(
                              attrs={'placeholder': 'Password', 'class': 'form-control'})
         self.fields['password'].label = "Password"
-
-    def clean(self):
-        username=self.cleaned_data['username']
-        password=self.cleaned_data['password']
-        user = auth.authenticate(username=username, password=password)
-        if user is not None:
-            auth.login(self.request, user)
-        else:
-            raise forms.ValidationError("Login Credentials does not match")
 
 
 class BlogForm(forms.ModelForm):

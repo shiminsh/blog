@@ -69,6 +69,11 @@ class Common(Configuration):
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     )
 
+    TEMPLATE_CONTEXT_PROCESSORS = (
+        'django.contrib.messages.context_processors.messages',
+        'django.contrib.auth.context_processors.auth',
+    )
+
     ROOT_URLCONF = 'config.urls'
 
     WSGI_APPLICATION = 'config.wsgi.application'
@@ -121,6 +126,8 @@ class Common(Configuration):
 
     DJANGO_WYSIWYG_FLAVOR = "tinymce_advanced"
 
+    LOGIN_REDIRECT_URL = '/accounts/loggedin/'
+
 class Local(Common):
 
     # DEBUG
@@ -149,6 +156,7 @@ class Local(Common):
         'SHOW_TEMPLATE_CONTEXT': True,
     }
     # end django-debug-toolbar
+
 
 class Production(Common):
     
