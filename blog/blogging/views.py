@@ -19,7 +19,7 @@ from django.contrib import messages
 class RegisterUser(FormView):
      template_name='register.html'
      form_class=RegistrationForm
-     success_url='/accounts/login'
+     success_url='/accounts/register'
 
      def form_valid(self, form):
         form.save()
@@ -47,7 +47,6 @@ class LoginView(FormView):
         kwargs['request'] = self.request
         return kwargs
 
-login = LoginView.as_view()
 
 
 class Loggedin(TemplateView):
@@ -69,17 +68,6 @@ class Logout(TemplateView):
     def dispatch(self, *args, **kwargs):
         return super(Logout, self).dispatch(*args, **kwargs)
 
-def createblog(request):
-    return render_to_response('newpost.html', context_instance=RequestContext(request))
-
-
-def postbyme(request):
-    title=request.POST.get('title', '')
-    description=request.POST.get('description', '')
-    d=Blog(title=title.lower(), description=description.lower())
-    d.user = request.user
-    d.save()
-    return HttpResponseRedirect('/accounts/loggedin/')
 
 class PostByMe(FormView):
     form_class=BlogForm

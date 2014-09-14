@@ -32,6 +32,8 @@ class Common(Configuration):
     TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.auth.context_processors.auth',
         'django.core.context_processors.request',
+        'django.contrib.messages.context_processors.messages',
+
         )
 
     ALLOWED_HOSTS = []
@@ -67,11 +69,6 @@ class Common(Configuration):
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    )
-
-    TEMPLATE_CONTEXT_PROCESSORS = (
-        'django.contrib.messages.context_processors.messages',
-        'django.contrib.auth.context_processors.auth',
     )
 
     ROOT_URLCONF = 'config.urls'
