@@ -49,36 +49,25 @@
      
     <div class="container marketing">
       
-        <div class="container">
-
+    <div class="container">
       <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-xs-12 col-sm-9">
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
           <div class="jumbotron">
-            <h1>{{ request.user.username|title }}</h1>
-            <p>The article is the best platform for worth idea spreading so you can start blogging ...</p>
-          </div>
-          <div class="row">
-        {% if object_list %}
-              {% for blog in object_list %}
-              <div class="col-6 col-sm-6 col-lg-4">  
-              <a href="/blog/{{ blog.id }}/"><h2>{{ blog.title|title }}</h2></a>
-              <p>{{ blog.description|truncatewords:"20"|capfirst|safe }} </p>
+            <h2>{{ blog.title|title }}</h2>
+            <hr>
+        <p>{{ blog.description|capfirst|safe }} </p>
+
               <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-              </div><!--/span-->
-            {% endfor %}
-            {% else %}
-      No posted blog yet
-      {% endif %}            
-          </div><!--/row-->
-        </div><!--/span-->
+          </div>
+        </div><!--/row-->
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
           <div class="well sidebar-nav">
             <ul class="nav">
-              <li>Some Links</li>
+              <li>Sidebar</li>
               <li class="active"><a href="#">Change Password??</a></li>
               <li><a href="#">Link</a></li>
               <li><a href="#">Link</a></li>
@@ -90,5 +79,6 @@
           </div><!--/.well -->
         </div><!--/span-->
       </div><!--/row-->
-      </div>
+    </div>
+
  {% endblock %}

@@ -21,4 +21,9 @@ urlpatterns = patterns('',
     view=views.UserListView.as_view(),
     name='detail'
     ),
+    url(
+        regex=r'^blog/(?P<pk>[\w\-_]+)/$',
+        view=views.UserDetailView.as_view(),
+        name='user_detail'
+    ),
 )

@@ -88,6 +88,7 @@ class PostByMe(FormView):
 class UserListView(ListView):
     model = Blog
     template_name = 'loggedin.html'
+    success_url='/blog/{{ blog.id }}/'
 
     def get_queryset(self):
         return self.request.user.blog_set.all()
@@ -95,3 +96,32 @@ class UserListView(ListView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(UserListView, self).dispatch(*args, **kwargs)
+
+class UserDetailView(DetailView):
+    template_name = 'blog.html'
+    model = Blog
+
+    def get_object(self, queryset=None):
+    # Use a custom queryset if provided; this is required for subclasses
+    # like DateDetailView
+        if queryset is None:
+            queryset = self.get_queryset()
+        # Next, try looking up by primary key.
+        pk = self.kwargs.get(self.pk_url_kwarg, None)
+        slug = self.kwargs.get(self.slug_url_kwarg, None)
+        if pk is not None:
+            queryset = queryset.filter(pk=pk)
+        # Next, try looking up by slug.
+        elif slug is not None:
+            slug_field = self.get_slug_field()
+            queryset = queryset.filter(**{slug_field: slug})
+        # If none of those are defined, it's an error.
+        else:
+            raise AttributeError("Generic detail view %s must be called with "
+                             "either an object pk or a slug."
+                             % self.__class__.__name__)
+        return self.request.user.blog_set.get(id=self.kwargs['pk'])
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(UserDetailView, self).dispatch(*args, **kwargs)
