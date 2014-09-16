@@ -26,4 +26,10 @@ urlpatterns = patterns('',
         view=views.UserDetailView.as_view(),
         name='user_detail'
     ),
+    url(
+        regex=r'^update/(?P<pk>[\w\-_]+)/edit/$',
+        view= views.UserUpdate.as_view(),
+        name='user-update'
+    ),
+
 )

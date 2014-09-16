@@ -14,6 +14,8 @@ from django.views.generic import TemplateView
 from django.views.generic import DetailView, ListView
 from blogging.models import Blog
 from django.contrib import messages
+from django.views.generic import UpdateView
+
 
 
 class RegisterUser(FormView):
@@ -125,3 +127,25 @@ class UserDetailView(DetailView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(UserDetailView, self).dispatch(*args, **kwargs)
+
+class UserUpdate(UpdateView):  
+    form_class = BlogForm
+    template_name = 'update.html'
+    model = Blog
+
+    def get_success_url(self):
+        self.success_url = '/accounts/loggedin/'
+        return self.success_url
+
+        #get object
+    def get_object(self, queryset=None): 
+        return self.request.user.blog_set.get(id=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super(UserUpdate, self).get_context_data(**kwargs)
+        context['blog_id'] = self.kwargs['pk']
+        return context
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(UserUpdate, self).dispatch(*args, **kwargs)

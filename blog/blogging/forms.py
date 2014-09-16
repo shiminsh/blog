@@ -77,3 +77,5 @@ class BlogForm(forms.ModelForm):
         self.fields['description'].widget = forms.Textarea(
                              attrs={'class': 'form-control', 'rows': 30, 'cols': 90 })
         self.fields['description'].label = "Enter Description"
+
+
